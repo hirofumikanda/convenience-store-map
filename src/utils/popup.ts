@@ -1,7 +1,7 @@
 import maplibregl, { Map, MapMouseEvent } from "maplibre-gl";
 import type { MapGeoJSONFeature } from "maplibre-gl";
 
-const ALLOW_LAYERS = ["convenience_store_labels"];
+const ALLOW_LAYERS = ["convenience_store_labels", "convenience_store_buffers"];
 
 export const setupPopupHandler = (map: Map) => {
   map.on("click", (e: MapMouseEvent) => {
