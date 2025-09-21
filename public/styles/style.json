@@ -1,0 +1,140 @@
+{
+  "version": 8,
+  "sources": {
+    "pale": {
+      "type": "raster",
+      "tiles": ["https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"],
+      "minzoom": 0,
+      "maxzoom": 18,
+      "attribution": "<a href=\"https://maps.gsi.go.jp/development/ichiran.html#pale\">地理院タイル</a>"
+    },
+    "convenience": {
+      "type": "vector",
+      "url": "pmtiles:///convenience-store-map/data/convenience.pmtiles",
+      "minzoom": 8,
+      "maxzoom": 14,
+      "attribution": "© OpenStreetMap contributors, Overture Maps Foundation"
+    },
+    "convenience_buffer": {
+      "type": "vector",
+      "url": "pmtiles:///convenience-store-map/data/convenience_buffer.pmtiles",
+      "minzoom": 8,
+      "maxzoom": 14,
+      "attribution": "© OpenStreetMap contributors, Overture Maps Foundation"
+    }
+  },
+  "glyphs": "font/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "pale",
+      "type": "raster",
+      "source": "pale",
+      "paint": {
+        "raster-opacity": 0.4
+      }
+    },
+    {
+      "id": "convenience_store_buffers",
+      "type": "fill",
+      "source": "convenience_buffer",
+      "source-layer": "convenience_buffer",
+      "paint": {
+        "fill-color": [
+          "case",
+          [
+            "any",
+            ["in", "ローソン", ["get", "name"]],
+            ["in", "LAWSON", ["get", "name"]],
+            ["in", "Lawson", ["get", "name"]]
+          ],
+          "rgb(64, 158, 255)",
+          [
+            "any",
+            ["in", "ファミリーマート", ["get", "name"]],
+            ["in", "FamilyMart", ["get", "name"]],
+            ["in", "ファミマ", ["get", "name"]]
+          ],
+          "rgb(0, 128, 0)",
+          [
+            "any",
+            ["in", "セブンイレブン", ["get", "name"]],
+            ["in", "7-Eleven", ["get", "name"]],
+            ["in", "Seven-Eleven", ["get", "name"]],
+            ["in", "セブン-イレブン", ["get", "name"]]
+          ],
+          "rgb(255, 0, 0)",
+          [
+            "any",
+            ["in", "ミニストップ", ["get", "name"]],
+            ["in", "Mini Stop", ["get", "name"]],
+            ["in", "Ministop", ["get", "name"]]
+          ],
+          "rgb(0, 0, 255)",
+          ["any", ["in", "サンクス", ["get", "name"]]],
+          "rgb(255, 215, 0)",
+          "rgb(255, 255, 255, 0)"
+        ],
+        "fill-outline-color": "rgb(255, 255, 255, 0)",
+        "fill-opacity": 0.1
+      },
+      "minzoom": 8
+    },
+    {
+      "id": "convenience_store_labels",
+      "type": "symbol",
+      "source": "convenience",
+      "source-layer": "convenience",
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 9.5,
+        "text-variable-anchor": ["top", "right", "bottom", "left"],
+        "text-justify": "auto",
+        "text-radial-offset": 1.0,
+        "text-allow-overlap": true,
+        "icon-image": [
+          "case",
+          [
+            "any",
+            ["in", "ローソン", ["get", "name"]],
+            ["in", "LAWSON", ["get", "name"]],
+            ["in", "Lawson", ["get", "name"]]
+          ],
+          "water",
+          [
+            "any",
+            ["in", "ファミリーマート", ["get", "name"]],
+            ["in", "FamilyMart", ["get", "name"]],
+            ["in", "ファミマ", ["get", "name"]]
+          ],
+          "green",
+          [
+            "any",
+            ["in", "セブンイレブン", ["get", "name"]],
+            ["in", "7-Eleven", ["get", "name"]],
+            ["in", "Seven-Eleven", ["get", "name"]],
+            ["in", "セブン-イレブン", ["get", "name"]]
+          ],
+          "red",
+          [
+            "any",
+            ["in", "ミニストップ", ["get", "name"]],
+            ["in", "Mini Stop", ["get", "name"]],
+            ["in", "Ministop", ["get", "name"]]
+          ],
+          "blue",
+          ["any", ["in", "サンクス", ["get", "name"]]],
+          "gold",
+          ""
+        ],
+        "icon-size": 0.1,
+        "icon-allow-overlap": true
+      },
+      "paint": {
+        "text-color": "#000",
+        "text-opacity": ["step", ["zoom"], 0, 15, 1]
+      },
+      "minzoom": 8
+    }
+  ]
+}
