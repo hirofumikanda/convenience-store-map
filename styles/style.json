@@ -6,7 +6,7 @@
       "tiles": ["https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"],
       "minzoom": 0,
       "maxzoom": 18,
-      "attribution": "<a href=\"https://maps.gsi.go.jp/development/ichiran.html#pale\">地理院タイル</a>"
+      "attribution": "<a href=\"https://maps.gsi.go.jp/development/ichiran.html#pale\" target=\"_blank\">地理院タイル</a>"
     },
     "convenience": {
       "type": "vector",
@@ -21,6 +21,13 @@
       "minzoom": 8,
       "maxzoom": 14,
       "attribution": "© OpenStreetMap contributors, Overture Maps Foundation"
+    },
+    "did": {
+      "type": "vector",
+      "url": "pmtiles:///convenience-store-map/data/did.pmtiles",
+      "minzoom": 4,
+      "maxzoom": 14,
+      "attribution": "<a href=\"https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html\" target=\"_blank\">人口集中地区データ（国土数値情報）</a>"
     }
   },
   "glyphs": "font/{fontstack}/{range}.pbf",
@@ -32,6 +39,18 @@
       "paint": {
         "raster-opacity": 0.4
       }
+    },
+    {
+      "id": "did",
+      "type": "fill",
+      "source": "did",
+      "source-layer": "did",
+      "paint": {
+        "fill-color": "rgb(255, 255, 0)",
+        "fill-outline-color": "rgb(255, 255, 255, 0)",
+        "fill-opacity": 0.3
+      },
+      "minzoom": 4
     },
     {
       "id": "convenience_store_buffers",
